@@ -17,10 +17,9 @@ curl -O https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minir
 ```
 >The file is ~3.2Mb
 ## 2. Build the Docker image from scratch
-You need the files `Dockerfile`, `banner` and `entrypoint.sh` to build the image.
-Use this command to build the Docker image:
+You need the files `Dockerfile`, `banner` and `entrypoint.sh`. Use this command to build the Docker image:
 ```shell
-docker build . -t openssl:3.17.0
+docker build . -t tempo:3.17.0
 ```
 ## 3. Test the container locally
 Use this command to run your container and get a shell.
