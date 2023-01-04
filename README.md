@@ -95,6 +95,8 @@ docker rm -f openssl
 # Create a certificate
 Let's try to generate a certificate in the future (or in the past). I have a simple script to generate a self-signed certificate with ECC keys [here](https://gist.github.com/ddella/f6954409d2090908f6fec1fc3280d9d1). Copy the file to you local drive that you mapped inside your container. Start the container, SSH in it and execute the script or any OpenSSL command preceding with `LD_PRELOAD=libfaketime.so.1 FAKETIME="YYYY-MM-DD HH:MM:SS"`.  
 
+>If you mapped your local `~/Downloads/` directory to the directory `/var/tmp` inside the container, just copy the script to create your certificates in your local `~/Downloads/` directory. It will be accessible in the container via `/var/tmp`.  
+
 Use this command to start the container:
 ```
 docker run --rm -d -p 2222:22 --name openssl --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' -v ~/Downloads/:/var/tmp --hostname=openssl openssl:3.17.0
@@ -105,7 +107,7 @@ Use this command to acces the container:
 ssh -l root -p 2222 127.0.0.1
 ```
 
-Use this command to create a certificate in the future:
+Use this command to create a certificate, in the future (or the past):
 ```shell
 cd /var/tmp/
 LD_PRELOAD=libfaketime.so.1 FAKETIME="2035-01-01 10:10:00" ./self_signed_ecc.sh bogus_certificate
