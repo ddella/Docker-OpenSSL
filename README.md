@@ -93,7 +93,7 @@ Use this to terminate the container:
 docker rm -f openssl
 ```
 # Create a certificate
-Let's try to generate a certificate in the future (or in the past). I have a simple script to generate a self-signed certificate with ECC keys [here](https://gist.github.com/ddella/f6954409d2090908f6fec1fc3280d9d1). Copy the file to you local drive that you mapped inside your container. Start the container, SSH in it and execute the script or any OpenSSL command preceding with `LD_PRELOAD=libfaketime.so.1 FAKETIME="2035-01-01 10:10:00" FAKETIME_DONT_RESET=1`.  
+Let's try to generate a certificate in the future (or in the past). I have a simple script to generate a self-signed certificate with ECC keys [here](https://gist.github.com/ddella/f6954409d2090908f6fec1fc3280d9d1). Copy the file to you local drive that you mapped inside your container. Start the container, SSH in it and execute the script or any OpenSSL command preceding with `LD_PRELOAD=libfaketime.so.1 FAKETIME="YYYY-MM-DD HH:MM:SS"`.  
 
 Use this command to start the container:
 ```
@@ -107,7 +107,7 @@ ssh -l root -p 2222 127.0.0.1
 
 Use this command to create a certificate in the future:
 ```shell
-LD_PRELOAD=libfaketime.so.1 FAKETIME="2035-01-01 10:10:00" FAKETIME_DONT_RESET=1 /var/tmp/self_signed_ecc.sh test
+LD_PRELOAD=libfaketime.so.1 FAKETIME="2035-01-01 10:10:00" /var/tmp/self_signed_ecc.sh test
 ```
 >The keys and certificate will be on your local drive, not the container.
 ## License
