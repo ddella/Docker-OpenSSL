@@ -24,7 +24,7 @@ docker build . -t tempo:3.17.0
 ## 3. Test the container locally
 Use this command to run your container and get a shell.
 ```sh
-docker run -it --rm --entrypoint /bin/sh --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' --name openssl --hostname=openssl openssl:3.17.0
+docker run -it --rm --entrypoint /bin/sh --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' --name openssl --hostname=openssl tempo:3.17.0
 ```
 The root password is `root`. I know, not the most secure password and it can be easily be guessed 😀  
 You can also use the username `remote`. This time I had security in mind so the password is very complicated. It will be in clear on the login page 🤣  
