@@ -60,12 +60,13 @@ docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl.tar openssl:3.17.0
 >openssl                  3.17.0            544147acb910   14 minutes ago   16.4MB
 >```
 ### Cleanup
-Exit the running container and delete the temporary image.  
+Exit the running container and delete the temporary Docker image.  
 
 Use this command to delete image:
 ```shell
 docker rmi tempo:3.17.0
 ```
+>You can delete the file `alpine-minirootfs-3.17.0-x86_64.tar.gz`.  
 ## 5. Run the container
 Use this command to start the container in detach mode:
 ```shell
@@ -93,4 +94,4 @@ docker rm -f openssl:3.17.0
 This project is licensed under the [MIT license](/LICENSE).  
 
 [_^ back to top of page_](#OpenSSL-and-libfaketime-on-Docker)  
-[_<< back to root_](../../../)
+[_< back to root_](../../../)
