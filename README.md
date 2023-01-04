@@ -17,7 +17,7 @@ curl -O https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minir
 ```
 >The file is ~3.2Mb
 ## 2. Build the Docker image from scratch
-You need the files `Dockerfile`, `banner` and `entrypoint.sh`. Use this command to build the Docker image:
+You need the files `Dockerfile`, `banner`, `motd`, and `entrypoint.sh`. Use this command to build the Docker image:
 ```shell
 docker build . -t tempo:3.17.0
 ```
@@ -31,38 +31,52 @@ You can also use the username `remote`. This time I had security in mind so the 
 
 If you want to test `libfaketime`, use this command:
 ```shell
-LD_PRELOAD=libfaketime.so.1 FAKETIME="2025-01-01 11:12:13" FAKETIME_DONT_RESET=1 /bin/date
+LD_PRELOAD=libfaketime.so.1 FAKETIME="2025-01-01 10:10:00" FAKETIME_DONT_RESET=1 /bin/date
 ```
+>Output:
+>Wed Jan  1 10:10:00 EAST 2025
 
-We you exit from the shell, the container will be terminated.
+Don't exit the container for now.
 ## 4. Trim down are container
-If take a look at the container, the size is 177MB. We could do way better. Let's trim down 
+If take a look at the container, the size is 177MB. We could do way better. Let's trim down.
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
->openssl                  3.17.0            23044fd6887d   19 minutes ago   177MB
+>tempo                    3.17.0            1c9fc5f9d9f6   2 minutes ago   177MB
 >```
 
-Use the following command to export the root filesystem to a local file.
+Use the following command to view the Docker image:
 ```shell
-docker export 23044fd6887d > new_openssl.tar
+docker ps
+```
+>Output:
+>```
+>CONTAINER ID   IMAGE          COMMAND     CREATED              STATUS              PORTS     NAMES
+>e77f216d063f   tempo:3.17.0   "/bin/sh"   About a minute ago   Up About a minute   22/tcp    openssl
+>```
+
+Use the following command to export the root filesystem to a local file **It NEEDS to be run as root**:
+```shell
+sudo docker export e77f216d063f > openssl.tar
 ```
 
+Use the following command to import the root filesystem to Docker:
 ```shell
-docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' .new_openssl.tar openssl:3.17.0
+docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl.tar openssl:3.17.0
 ```
-
+### Cleanup
+Exit the running container and delete the temporary image:
 Don't forget to delete the
 ```shell
-rm 
+docker rmi tempo:3.17.0
 ```
 
->The file is ~16Mb
+>The Dokcer image `openssl:3.17.0` is ~16Mb
 ## 5. Run the container
 Use this command to start the container in detach mode:
 ```shell
 docker run --rm -d -p 2222:22 --name openssl --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' -v ~/Downloads/:/var/tmp --hostname=openssl openssl:3.17.0
 ```
->**Note**: Change then mapping of the local drive to suit your needs.  
+>**Note**: Change the mapping of the local drive to suit your needs.  
 
 Open a terminal an SSH to the new container with the username `root`. You remember the password 😀:
 ```shell
