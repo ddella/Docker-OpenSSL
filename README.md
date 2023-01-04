@@ -91,6 +91,24 @@ Use this to terminate the container:
 ```sh   
 docker rm -f openssl
 ```
+# Create a certificate
+Lets try to generate a certificate in the future. I have a simple script to generate a self-signed certificate with ECC keys [here](https://gist.github.com/ddella/f6954409d2090908f6fec1fc3280d9d1). Copy the file to you local drive that you mapped inside your container.  
+
+Use this command to start the container:
+```
+docker run --rm -d -p 2222:22 --name openssl --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' -v ~/Downloads/:/var/tmp --hostname=openssl openssl:3.17.0
+```
+
+Use this command to acces the container:
+```shell
+ssh -l root -p 2222 127.0.0.1
+```
+
+Use this command to create a certificate in the future:
+```shell
+LD_PRELOAD=libfaketime.so.1 FAKETIME="2035-01-01 10:10:00" FAKETIME_DONT_RESET=1 /var/tmp/self_signed_ecc.sh test
+```
+>The keys and certificate will be on your local drive, not the container.
 ## License
 This project is licensed under the [MIT license](/LICENSE).  
 
