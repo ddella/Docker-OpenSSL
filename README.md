@@ -33,7 +33,7 @@ If you want to test `libfaketime`, use this command:
 ```shell
 LD_PRELOAD=libfaketime.so.1 FAKETIME="2025-01-01 10:10:00" FAKETIME_DONT_RESET=1 /bin/date
 ```
->Output:
+>Output:  
 >Wed Jan  1 10:10:00 EAST 2025
 
 Don't exit the container for now.
@@ -48,7 +48,7 @@ Use the following command to view the Docker image:
 ```shell
 docker ps
 ```
->Output:
+>Output:  
 >```
 >CONTAINER ID   IMAGE          COMMAND     CREATED              STATUS              PORTS     NAMES
 >e77f216d063f   tempo:3.17.0   "/bin/sh"   About a minute ago   Up About a minute   22/tcp    openssl
