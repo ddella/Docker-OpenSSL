@@ -19,7 +19,10 @@ RUN ["apk", "--no-cache", "add", "openssh"]
 # sudo installation.
 RUN ["apk", "--no-cache", "add", "sudo"]
 
-# remove packages
+# We need bash :-(
+RUN ["apk", "--no-cache", "add", "bash"]
+
+# remove packages, if any...
 RUN ["rm", "-rf", "/var/cache/apk/"]
 
 COPY banner /etc/ssh/

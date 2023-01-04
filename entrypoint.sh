@@ -49,5 +49,9 @@ sed -i 's/#PermitRootLogin.*/PermitRootLogin\ yes/' /etc/ssh/sshd_config
 # Set root password
 echo -n root:root | sudo chpasswd
 
+# Use bash shell
+rm /bin/sh
+ln -s /bin/bash /bin/sh
+
 # do not detach (-D), log to stderr (-e), passthrough other arguments
 exec /usr/sbin/sshd -D -e "$@"
