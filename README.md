@@ -49,10 +49,15 @@ Use the following command to export the root filesystem to a local file **It NEE
 sudo docker export $(docker ps -f "name=openssl" -q) > openssl.tar
 ```
 
-Use the following command to import the root filesystem to Docker:
+Use the following command to import the root filesystem back to Docker:
 ```shell
 docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl.tar openssl:3.17.0
 ```
+
+>```
+>REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
+>openssl                  3.17.0            544147acb910   14 minutes ago   16.4MB
+>```
 ### Cleanup
 Exit the running container and delete the temporary image.  
 
