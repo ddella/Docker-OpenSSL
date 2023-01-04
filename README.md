@@ -54,6 +54,7 @@ Use the following command to import the root filesystem back to Docker:
 docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl.tar openssl:3.17.0
 ```
 
+>The final Docker image `openssl:3.17.0` is ~16Mb
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
 >openssl                  3.17.0            544147acb910   14 minutes ago   16.4MB
@@ -65,8 +66,6 @@ Use this command to delete image:
 ```shell
 docker rmi tempo:3.17.0
 ```
-
->The final Docker image `openssl:3.17.0` is ~16Mb
 ## 5. Run the container
 Use this command to start the container in detach mode:
 ```shell
