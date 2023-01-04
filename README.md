@@ -88,7 +88,7 @@ ssh -l remote -p 2222 127.0.0.1
 ## 6. Terminate the container
 Use this to terminate the container:
 ```sh   
-docker rm -f openssl:3.17.0
+docker rm -f openssl
 ```
 ## License
 This project is licensed under the [MIT license](/LICENSE).  
