@@ -15,7 +15,7 @@ Use this command to copy the Alpine 3.17.0 mini root filesystem:
 ```shell
 curl -O https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.0-x86_64.tar.gz
 ```
->The file is ~3.2Mb
+>The file is ~3.2MB
 ## 2. Build the Docker image from scratch
 You need the files `Dockerfile`, `banner`, `motd`, and `entrypoint.sh`. Use this command to build the Docker image:
 ```shell
@@ -26,7 +26,7 @@ Use this command to run your container and get a shell.
 ```sh
 docker run -it --rm --entrypoint /bin/sh --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' --name openssl --hostname=openssl tempo:3.17.0
 ```
-The root password is `root`. I know, not the most secure password and it can be easily be guessed 😀  
+The root password is `root`. I know, not the most secure password and it can be easily guessed 😀  
 You can also use the username `remote`. This time I had security in mind so the password is very complicated. It will be in clear on the login page 🤣  
 
 If you want to test `libfaketime`, use this command:
@@ -84,7 +84,7 @@ Open a terminal an SSH to the new container with the username `remote`. Take a l
 ssh -l remote -p 2222 127.0.0.1
 ```
 
->In my case, if you do `ls -la /var/tmp` inside the container, I see my local `~/Downloads/` directory.  
+>In this example, if you do `ls -la /var/tmp` inside the container, I see my local `~/Downloads/` directory.  
 ## 6. Terminate the container
 Use this to terminate the container:
 ```sh   
