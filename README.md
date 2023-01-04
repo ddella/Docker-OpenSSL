@@ -49,6 +49,7 @@ Use the following command to export the root filesystem to a local file **It NEE
 ```shell
 sudo docker export $(docker ps -f "name=openssl" -q) > openssl-minirootfs-3.17.0-x86_64.tar
 ```
+>If you use option `-o` with `docker export` the file created will be owned by `root`.  
 
 Use the following command to import the root filesystem back to Docker:
 ```shell
