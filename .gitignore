@@ -4,4 +4,4 @@
 .env
 README.txt
 alpine-minirootfs-3.17.0-x86_64.tar.gz
-openssl-minirootfs-3.17.0-x86_64.tar
+openssl-minirootfs-*.tar
