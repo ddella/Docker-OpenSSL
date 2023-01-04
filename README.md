@@ -37,8 +37,8 @@ LD_PRELOAD=libfaketime.so.1 FAKETIME="2025-01-01 10:10:00" FAKETIME_DONT_RESET=1
 >Wed Jan  1 10:10:00 EAST 2025
 
 Don't exit the container for now.
-## 4. Trim down are container
-If take a look at the container, the size is 177MB. We could do way better. Let's trim down.
+## 4. Trim down the container
+If you take a look at the container, the size is 177MB. We could do way better. Let's trim it down.
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
 >tempo                    3.17.0            1c9fc5f9d9f6   2 minutes ago   177MB
