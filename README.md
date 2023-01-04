@@ -1,4 +1,5 @@
 # OpenSSL and libfaketime on Docker
+**WARNING** This script was made for educational purposes ONLY. USE AT YOUR OWN RISK!  
 ## Introduction
 This will build a Docker image, from scratch, with OpenSSL 3.0.7 on Alpine Linux 3.17.0. I also included [libfaketime](https://github.com/wolfcw/libfaketime). The purpose of this container is to be able to generate certificate in different moment in time, for testing purposes.  
 
