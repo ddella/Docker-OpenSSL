@@ -18,7 +18,8 @@ curl -O https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minir
 ```
 >The file is ~3.2MB
 ## 2. Build the Docker image from scratch
-You need the files `Dockerfile`, `banner`, `motd`, and `entrypoint.sh`. Use this command to build the Docker image:
+You need the files `Dockerfile`, `banner`, `motd`, and `entrypoint.sh`.  
+Use this command to build the Docker image:
 ```shell
 docker build . -t tempo:3.17.0
 ```
@@ -37,7 +38,7 @@ LD_PRELOAD=libfaketime.so.1 FAKETIME="2025-01-01 10:10:00" FAKETIME_DONT_RESET=1
 >Output:  
 >Wed Jan  1 10:10:00 EAST 2025
 
-Don't exit the container for now.
+**Don't exit the container for now.**
 ## 4. Trim down the container
 If you take a look at the container, the size is 177MB. We could do way better. Let's trim it down.
 >```
@@ -49,20 +50,20 @@ Use the following command to export the root filesystem to a local file **It NEE
 ```shell
 sudo docker export $(docker ps -f "name=openssl" -q) > openssl-minirootfs-3.17.0-x86_64.tar
 ```
->If you use option `-o` with `docker export` the file created will be owned by `root`.  
+>If you use option `-o` with `docker export` command, the file created will be owned by `root`.  
 
 Use the following command to import the root filesystem back to Docker:
 ```shell
 docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl-minirootfs-3.17.0-x86_64.tar openssl:3.17.0
 ```
 
->The final Docker image `openssl:3.17.0` is ~16Mb
+>The final Docker image `openssl:3.17.0` is ~18Mb
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
->openssl                  3.17.0            544147acb910   14 minutes ago   16.4MB
+>openssl                  3.17.0            544147acb910   14 minutes ago   18MB
 >```
 ### Cleanup
-Exit the running container and delete the temporary Docker image.  
+Exit the running container you started in step 3 and delete the temporary Docker image.  
 
 Use this command to delete image:
 ```shell
