@@ -44,19 +44,9 @@ If you take a look at the container, the size is 177MB. We could do way better. 
 >tempo                    3.17.0            1c9fc5f9d9f6   2 minutes ago   177MB
 >```
 
-Use the following command to view the Docker image:
-```shell
-docker ps
-```
->Output:  
->```
->CONTAINER ID   IMAGE          COMMAND     CREATED              STATUS              PORTS     NAMES
->e77f216d063f   tempo:3.17.0   "/bin/sh"   About a minute ago   Up About a minute   22/tcp    openssl
->```
-
 Use the following command to export the root filesystem to a local file **It NEEDS to be run as root**:
 ```shell
-sudo docker export e77f216d063f > openssl.tar
+sudo docker export $(docker ps -f "name=openssl" -q) > openssl.tar
 ```
 
 Use the following command to import the root filesystem to Docker:
