@@ -47,12 +47,12 @@ If you take a look at the container, the size is 177MB. We could do way better. 
 
 Use the following command to export the root filesystem to a local file **It NEEDS to be run as root**:
 ```shell
-sudo docker export $(docker ps -f "name=openssl" -q) > openssl.tar
+sudo docker export $(docker ps -f "name=openssl" -q) > openssl-minirootfs-3.17.0-x86_64.tar
 ```
 
 Use the following command to import the root filesystem back to Docker:
 ```shell
-docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl.tar openssl:3.17.0
+docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl-minirootfs-3.17.0-x86_64.tar openssl:3.17.0
 ```
 
 >The final Docker image `openssl:3.17.0` is ~16Mb
