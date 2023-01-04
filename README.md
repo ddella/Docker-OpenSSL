@@ -107,7 +107,8 @@ ssh -l root -p 2222 127.0.0.1
 
 Use this command to create a certificate in the future:
 ```shell
-LD_PRELOAD=libfaketime.so.1 FAKETIME="2035-01-01 10:10:00" /var/tmp/self_signed_ecc.sh test
+cd /var/tmp/
+LD_PRELOAD=libfaketime.so.1 FAKETIME="2035-01-01 10:10:00" ./self_signed_ecc.sh bogus_certificate
 ```
 >The keys and certificate will be on your local drive, not the container.
 ## License
