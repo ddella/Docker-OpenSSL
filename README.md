@@ -8,7 +8,7 @@ The build is a five step process:
 1. Get the Alpine Mini RootFS
 2. Build the Docker image from scratch
 3. Test the container locally
-4. Trim down are container
+4. Trim down the image
 5. Run the container
 
 ## 1. Alpine Mini RootFS
