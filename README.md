@@ -3,7 +3,10 @@ Docker Container with Alpine Linux 3.17.0, OpenSSL 3.0.7 and libfaketime 0.9.10.
 
 **WARNING** This script was made for educational purposes ONLY. USE AT YOUR OWN RISK!  
 
-Pull the image directly from [Docker Hub](https://hub.docker.com/r/ddella/openssl).
+### You can pull the image directly from [Docker Hub](https://hub.docker.com/r/ddella/openssl) with the command:
+```shell
+docker pull ddella/openssl
+```
 
 ![Alt text](images/Docker-OpenSSL.jpg)  
 
