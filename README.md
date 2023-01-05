@@ -14,7 +14,7 @@ The build is a five step process:
 5. Run the container
 
 ## 1. Alpine Mini RootFS
-Use this command to copy the Alpine 3.17.0 mini root filesystem:
+Use this command to download the Alpine 3.17.0 mini root filesystem:
 ```shell
 curl -O https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minirootfs-3.17.0-x86_64.tar.gz
 ```
@@ -31,9 +31,9 @@ Use this command to run your container and get a shell.
 docker run -it --rm --entrypoint /bin/sh --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' --name openssl --hostname=openssl tempo:3.0.7
 ```
 The root password is `root`. I know, not the most secure password and it can be easily guessed 😀  
-You can also use the username `remote`. This time I had security in mind so the password is very complicated. It will be in clear on the login page 🤣  
+You can also use the username `remote`. This time I had security in mind so the password is very complicated. It will be in clear on the banner page 🤣  
 
-If you want to test `libfaketime`, use this command:
+If you want to test the `libfaketime` library, use this command:
 ```shell
 LD_PRELOAD=libfaketime.so.1 FAKETIME="2025-01-01 10:10:00" FAKETIME_DONT_RESET=1 /bin/date
 ```
@@ -45,18 +45,18 @@ LD_PRELOAD=libfaketime.so.1 FAKETIME="2025-01-01 10:10:00" FAKETIME_DONT_RESET=1
 If you take a look at the container, the size is 177MB. We could do way better. Let's trim it down.
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
->tempo                    3.0.7             1c9fc5f9d9f6   2 minutes ago   177MB
+>tempo                    3.0.7             1c9fc5f9d9f6   2 minutes ago   178MB
 >```
 
 Use the following command to export the root filesystem to a local file **It NEEDS to be run as root**:
 ```shell
-sudo docker export $(docker ps -f "name=openssl" -q) > openssl-minirootfs-3.17.0-x86_64.tar
+sudo docker export $(docker ps -f "name=openssl" -q) > openssl-minirootfs-3.0.7-x86_64.tar
 ```
 >If you use option `-o` with `docker export` command, the file created will be owned by `root`.  
 
 Use the following command to import the root filesystem back to Docker:
 ```shell
-docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl-minirootfs-3.17.0-x86_64.tar openssl:3.0.7
+docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl-minirootfs-3.0.7-x86_64.tar openssl:3.0.7
 ```
 
 >The final Docker image `openssl:3.0.7` is ~18Mb

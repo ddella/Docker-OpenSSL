@@ -10,14 +10,28 @@ EXPOSE 22
 # Update Alpine
 RUN ["apk", "--no-cache", "update", "upgrade"]
 
-# OpenSSL, OpenSSH, sudo and bash Installation
-RUN ["apk", "--no-cache", "add", "openssl", "openssh", "sudo", "bash"]
+# OpenSSL Installation
+RUN ["apk", "--no-cache", "add", "openssl"]
+
+# OpenSSH installation, permit "root" and set "root" password
+RUN ["apk", "--no-cache", "add", "openssh"]
+
+# sudo installation.
+RUN ["apk", "--no-cache", "add", "sudo"]
+
+# We need bash :-(
+RUN ["apk", "--no-cache", "add", "bash"]
 
 COPY banner /etc/ssh/
 COPY motd /etc/
 COPY entrypoint.sh /
 
 # Install GCC and cie
+#RUN ["apk", "--no-cache", "add", "make"]
+#RUN ["apk", "--no-cache", "add", "gcc"]
+#RUN ["apk", "--no-cache", "add", "libc-dev"]
+#RUN ["apk", "--no-cache", "add", "git"]
+
 RUN ["apk", "--no-cache", "add", "make", "gcc", "libc-dev", "git"]
 
 # Get libfaketime sources from github and build
@@ -34,7 +48,12 @@ RUN ["rm", "-rf", "/libfaketime"]
 # Uninstall GCC and cie
 RUN ["apk", "--no-cache", "del", "make", "gcc", "libc-dev", "git"]
 
-# Remove any left-over packages, if any...
+#RUN ["apk", "--no-cache", "del", "make"]
+#RUN ["apk", "--no-cache", "del", "gcc"]
+#RUN ["apk", "--no-cache", "del", "libc-dev"]
+#RUN ["apk", "--no-cache", "del", "git"]
+
+# Remove packages, if any...
 RUN ["rm", "-rf", "/var/cache/apk/"]
 
 # Make the script 'executable'. Prevents the error: permission denied unknown

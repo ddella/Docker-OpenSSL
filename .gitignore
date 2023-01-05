@@ -3,6 +3,7 @@
 .gitignore.swp
 .env
 README.txt
-alpine-minirootfs-3.17.0-x86_64.tar.gz
+alpine-minirootfs-*.tar.gz
 openssl-minirootfs-*.tar
 *.docx
+.git
