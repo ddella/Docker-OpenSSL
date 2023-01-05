@@ -23,12 +23,12 @@ curl -O https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-minir
 You need the files `Dockerfile`, `banner`, `motd`, and `entrypoint.sh`.  
 Use this command to build the Docker image:
 ```shell
-docker build . -t tempo:3.17.0
+docker build . -t tempo:3.0.7
 ```
 ## 3. Test the container locally
 Use this command to run your container and get a shell.
 ```sh
-docker run -it --rm --entrypoint /bin/sh --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' --name openssl --hostname=openssl tempo:3.17.0
+docker run -it --rm --entrypoint /bin/sh --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' --name openssl --hostname=openssl tempo:3.0.7
 ```
 The root password is `root`. I know, not the most secure password and it can be easily guessed 😀  
 You can also use the username `remote`. This time I had security in mind so the password is very complicated. It will be in clear on the login page 🤣  
@@ -45,7 +45,7 @@ LD_PRELOAD=libfaketime.so.1 FAKETIME="2025-01-01 10:10:00" FAKETIME_DONT_RESET=1
 If you take a look at the container, the size is 177MB. We could do way better. Let's trim it down.
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
->tempo                    3.17.0            1c9fc5f9d9f6   2 minutes ago   177MB
+>tempo                    3.0.7            1c9fc5f9d9f6   2 minutes ago   177MB
 >```
 
 Use the following command to export the root filesystem to a local file **It NEEDS to be run as root**:
@@ -56,26 +56,26 @@ sudo docker export $(docker ps -f "name=openssl" -q) > openssl-minirootfs-3.17.0
 
 Use the following command to import the root filesystem back to Docker:
 ```shell
-docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl-minirootfs-3.17.0-x86_64.tar openssl:3.17.0
+docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl-minirootfs-3.17.0-x86_64.tar openssl:3.0.7
 ```
 
->The final Docker image `openssl:3.17.0` is ~18Mb
+>The final Docker image `openssl:3.0.7` is ~18Mb
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
->openssl                  3.17.0            544147acb910   14 minutes ago   18MB
+>openssl                  3.0.7            544147acb910   14 minutes ago   18MB
 >```
 ### Cleanup
 Exit the running container you started in step 3 and delete the temporary Docker image.  
 
 Use this command to delete image:
 ```shell
-docker rmi tempo:3.17.0
+docker rmi tempo:3.0.7
 ```
 >You can delete the file `alpine-minirootfs-3.17.0-x86_64.tar.gz`.  
 ## 5. Run the container
 Use this command to start the container in detach mode:
 ```shell
-docker run --rm -d -p 2222:22 --name openssl --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' -v ~/Downloads/:/var/tmp --hostname=openssl openssl:3.17.0
+docker run --rm -d -p 2222:22 --name openssl --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' -v ~/Downloads/:/var/tmp --hostname=openssl openssl:3.0.7
 ```
 >**Note**: Change the mapping of the local drive to suit your needs.  
 
@@ -102,7 +102,7 @@ Let's try to generate a certificate in the future (or in the past). I have a sim
 
 Use this command to start the container:
 ```
-docker run --rm -d -p 2222:22 --name openssl --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' -v ~/Downloads/:/var/tmp --hostname=openssl openssl:3.17.0
+docker run --rm -d -p 2222:22 --name openssl --env TZ='EAST+5EDT,M3.2.0/2,M11.1.0/2' --env TIMEZONE='America/New_York' -v ~/Downloads/:/var/tmp --hostname=openssl openssl:3.0.7
 ```
 
 Use this command to acces the container:
