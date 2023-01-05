@@ -65,7 +65,8 @@ docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl-minirootfs-3.0.7-x86_64
 >openssl                  3.0.7             544147acb910   14 minutes ago   18MB
 >```
 ### Cleanup
-Exit the running container you started in step 3 and delete the temporary Docker image.  
+Exit the running container you started in step 3 and delete the temporary Docker image. If you forget to exit the running container, you will reveive the follwoing error message:  
+>Error response from daemon: conflict: unable to remove repository reference "tempo:3.0.7" (must force) - container 0c76afe2763e is using its referenced image 1c9fc5f9d9f6  
 
 Use this command to delete image:
 ```shell
