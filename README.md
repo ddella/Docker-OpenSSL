@@ -45,7 +45,7 @@ LD_PRELOAD=libfaketime.so.1 FAKETIME="2025-01-01 10:10:00" FAKETIME_DONT_RESET=1
 If you take a look at the container, the size is 177MB. We could do way better. Let's trim it down.
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
->tempo                    3.0.7            1c9fc5f9d9f6   2 minutes ago   177MB
+>tempo                    3.0.7             1c9fc5f9d9f6   2 minutes ago   177MB
 >```
 
 Use the following command to export the root filesystem to a local file **It NEEDS to be run as root**:
@@ -62,7 +62,7 @@ docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl-minirootfs-3.17.0-x86_6
 >The final Docker image `openssl:3.0.7` is ~18Mb
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
->openssl                  3.0.7            544147acb910   14 minutes ago   18MB
+>openssl                  3.0.7             544147acb910   14 minutes ago   18MB
 >```
 ### Cleanup
 Exit the running container you started in step 3 and delete the temporary Docker image.  
