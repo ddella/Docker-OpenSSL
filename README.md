@@ -108,10 +108,10 @@ docker run --rm -d -p 2222:22 --name openssl --env TZ='EAST+5EDT,M3.2.0/2,M11.1.
 
 Use this command to acces the container:
 ```shell
-ssh -l root -p 2222 127.0.0.1
+ssh -l remote -p 2222 127.0.0.1
 ```
 
-Use this command, inside the container, to create a certificate either in the future or in the past:
+Use this command, inside the container, to create a certificate either in the future or in the past. Just set the date:
 ```shell
 cd /var/tmp/
 LD_PRELOAD=libfaketime.so.1 FAKETIME="2035-01-01 10:10:00" ./self_signed_ecc.sh bogus_certificate
