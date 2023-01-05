@@ -2,6 +2,7 @@
 Docker Container with Alpine Linux 3.17.0, OpenSSL 3.0.7 and libfaketime 0.9.10.  
 
 **WARNING** This script was made for educational purposes ONLY. USE AT YOUR OWN RISK!  
+![Alt text](https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png) ![Alt text](https://upload.wikimedia.org/wikipedia/commons/archive/a/a1/20171126183129%21OpenSSL_logo.png)
 ## Introduction
 This will build a Docker image, from scratch, with OpenSSL 3.0.7 on Alpine Linux 3.17.0. I also included [libfaketime](https://github.com/wolfcw/libfaketime). The purpose of this container is to be able to generate certificate in different moment in time, for testing purposes.  
 
