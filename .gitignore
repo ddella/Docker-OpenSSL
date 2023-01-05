@@ -7,3 +7,4 @@ alpine-minirootfs-*.tar.gz
 openssl-minirootfs-*.tar
 *.docx
 .git
+README.pptx
