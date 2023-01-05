@@ -22,9 +22,6 @@ RUN ["apk", "--no-cache", "add", "sudo"]
 # We need bash :-(
 RUN ["apk", "--no-cache", "add", "bash"]
 
-# remove packages, if any...
-RUN ["rm", "-rf", "/var/cache/apk/"]
-
 COPY banner /etc/ssh/
 COPY motd /etc/
 COPY entrypoint.sh /
@@ -52,7 +49,9 @@ RUN ["apk", "--no-cache", "del", "gcc"]
 RUN ["apk", "--no-cache", "del", "libc-dev"]
 RUN ["apk", "--no-cache", "del", "git"]
 
-# The following line is to prevent the error:
+# Remove packages, if any...
+RUN ["rm", "-rf", "/var/cache/apk/"]
+
 # Make the script 'executable'. Prevents the error: permission denied unknown
 RUN ["chmod", "+x", "/entrypoint.sh"]
 
