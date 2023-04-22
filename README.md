@@ -75,7 +75,7 @@ openssl version
 ## 5. Trim down the container
 Start a new shell and leave the container running:
 
-If you take a look at the container, the size is 1.5Gb. We could do way better. Let's trim it down.
+If you take a look at the container, the size is 1.4Gb. We could do way better. Let's trim it down.
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
 >tempo                    3.1.0             1c9fc5f9d9f6   2 minutes ago   1.41GB
@@ -92,13 +92,14 @@ Use the following command to import the root filesystem back to Docker:
 docker import -c 'ENTRYPOINT ["/entrypoint.sh"]' openssl-minirootfs-3.1.0-x86_64.tar openssl:3.1.0
 ```
 
->The final Docker image `openssl:3.1.0` is ~18Mb
+>The final Docker image `openssl:3.1.0` is ~52Mb
 >```
 >REPOSITORY               TAG               IMAGE ID       CREATED          SIZE
 >openssl                  3.1.0             544147acb910   14 minutes ago   51.9MB
 >```
 ### Cleanup
-Exit the running container you started in step 3 and delete the temporary Docker image. If you forget to exit the running container, you will reveive the following error message:  
+Exit the running container you started in step 4 and delete the temporary Docker image. If you forget to exit the running container, you will reveive the following error message:  
+
 >Error response from daemon: conflict: unable to remove repository reference "tempo:3.1.0" (must force) - container 0c76afe2763e is using its referenced image 1c9fc5f9d9f6  
 
 Use this command to delete image:
